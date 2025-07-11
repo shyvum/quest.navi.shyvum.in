@@ -1025,9 +1025,266 @@ function showFailureScreen() {
     
     // Ensure CSS styles are available (same as win page)
     if (!document.getElementById('win-page-styles')) {
-        console.log('CSS not loaded, will be loaded by win page styles');
-        // The CSS will be loaded by the win page function when needed
-        // For now, just ensure the overlay uses the same classes
+        console.log('Loading CSS styles for failure screen');
+        const styles = document.createElement('style');
+        styles.id = 'win-page-styles';
+        styles.textContent = `
+            .win-page-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, 
+                    rgba(30, 30, 40, 0.95),
+                    rgba(20, 25, 35, 0.95),
+                    rgba(15, 20, 30, 0.95)
+                );
+                backdrop-filter: blur(40px) saturate(150%);
+                -webkit-backdrop-filter: blur(40px) saturate(150%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                font-family: 'Titillium Web', sans-serif;
+                overflow: hidden;
+            }
+            
+            .win-page-content {
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.05)
+                );
+                backdrop-filter: blur(30px) saturate(120%);
+                -webkit-backdrop-filter: blur(30px) saturate(120%);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 25px;
+                padding: 40px 30px;
+                max-width: 90vw;
+                max-height: 90vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                text-align: center;
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.3),
+                    0 4px 16px rgba(255, 255, 255, 0.1) inset,
+                    0 -4px 16px rgba(0, 0, 0, 0.1) inset;
+                position: relative;
+            }
+            
+            .win-page-content::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -50%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    rgba(255, 255, 255, 0.15), 
+                    transparent
+                );
+                animation: winPageShimmer 3s infinite;
+                pointer-events: none;
+            }
+            
+            @keyframes winPageShimmer {
+                0% { left: -50%; }
+                100% { left: 100%; }
+            }
+            
+            .win-page-content h2 {
+                color: rgba(255, 255, 255, 0.95);
+                margin-bottom: 15px;
+                font-size: 2.2em;
+                font-weight: 700;
+                text-shadow: 
+                    0 4px 20px rgba(100, 120, 140, 0.3),
+                    0 0 30px rgba(255, 255, 255, 0.1);
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 1),
+                    rgba(200, 210, 220, 0.9)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            
+            .win-page-content p {
+                color: rgba(255, 255, 255, 0.85);
+                font-size: 1.1em;
+                margin-bottom: 25px;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+            
+            .completion-stats {
+                display: flex;
+                justify-content: center;
+                margin: 25px 0;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .stat-item {
+                text-align: center;
+                padding: 18px 15px;
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0.05)
+                );
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 18px;
+                color: rgba(255, 255, 255, 0.95);
+                flex: 1;
+                min-width: 120px;
+                box-shadow: 
+                    0 8px 24px rgba(0, 0, 0, 0.1),
+                    0 2px 6px rgba(255, 255, 255, 0.15) inset;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .stat-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50%;
+                background: linear-gradient(180deg, 
+                    rgba(255, 255, 255, 0.1), 
+                    transparent
+                );
+                border-radius: 18px 18px 0 0;
+            }
+            
+            .stat-number {
+                display: block;
+                font-size: 2.2em;
+                font-weight: 700;
+                text-shadow: 
+                    0 2px 8px rgba(0, 0, 0, 0.3),
+                    0 0 15px rgba(255, 255, 255, 0.2);
+                margin-bottom: 5px;
+            }
+            
+            .stat-label {
+                font-size: 0.85em;
+                opacity: 0.85;
+                font-weight: 500;
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+                letter-spacing: 0.3px;
+            }
+            
+            .win-page-actions {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                margin-top: 25px;
+                flex-wrap: wrap;
+            }
+            
+            .win-btn {
+                font-family: 'Titillium Web', sans-serif;
+                padding: 15px 30px;
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                border-radius: 30px;
+                font-size: 1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                position: relative;
+                overflow: hidden;
+                min-width: 140px;
+                text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            }
+            
+            .win-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    rgba(255, 255, 255, 0.2), 
+                    transparent
+                );
+                transition: left 0.5s ease;
+            }
+            
+            .win-btn:hover::before {
+                left: 100%;
+            }
+            
+            .win-btn:hover {
+                transform: translateY(-2px) scale(1.05);
+                box-shadow: 
+                    0 12px 30px rgba(0, 0, 0, 0.15),
+                    0 4px 12px rgba(255, 255, 255, 0.2) inset;
+            }
+            
+            .win-btn:active {
+                transform: translateY(0) scale(0.98);
+            }
+            
+            .win-btn.primary {
+                background: linear-gradient(135deg, 
+                    rgba(138, 43, 226, 0.8),
+                    rgba(75, 0, 130, 0.6)
+                );
+                color: rgba(255, 255, 255, 0.95);
+                border-top: 1px solid rgba(255, 255, 255, 0.4);
+                box-shadow: 
+                    0 8px 25px rgba(0, 0, 0, 0.1),
+                    0 2px 6px rgba(255, 255, 255, 0.15) inset,
+                    0 0 20px rgba(138, 43, 226, 0.3);
+            }
+            
+            .win-btn.secondary {
+                background: linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.05)
+                );
+                color: rgba(255, 255, 255, 0.9);
+                box-shadow: 
+                    0 8px 25px rgba(0, 0, 0, 0.08),
+                    0 2px 6px rgba(255, 255, 255, 0.1) inset;
+            }
+            
+            @media (max-width: 480px) {
+                .win-page-content {
+                    padding: 25px 20px;
+                    margin: 10px;
+                }
+                
+                .completion-stats {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                
+                .stat-item {
+                    min-width: auto;
+                }
+                
+                .win-page-actions {
+                    flex-direction: column;
+                    gap: 12px;
+                }
+                
+                .win-btn {
+                    min-width: auto;
+                    width: 100%;
+                }
+            }
+        `;
+        document.head.appendChild(styles);
+        console.log('CSS styles loaded for failure screen');
     }
     
     // Reset challenge failed flag now that failure screen is shown
