@@ -1,0 +1,2923 @@
+/* Navi Coupon Hunt - Purple Theme Color Palette */
+:root {
+    /* Primary Purple Colors */
+    --primary-p0: #1F002A;  /* Deepest purple */
+    --primary-p10: #290932; /* Very dark purple */
+    --primary-on: #76529A;  /* Medium purple */
+    --primary-bright: #381763; /* Dark purple */
+    
+    /* Secondary Colors */
+    --secondary-s80: #290932;
+    --secondary-s60: #381763;
+    --secondary-s90: #1F002A;
+    --secondary-on: #76529A;
+    
+    /* Tertiary Colors */
+    --tertiary-s30: #76529A;
+    
+    /* Success Colors (Green Accent) */
+    --success-su40: #3EA45D;
+    --success-su90: rgba(62, 164, 93, 0.1);
+    --success-su10: #2A7A42;
+    
+    /* Error Colors */
+    --error-e30: #BD0000;
+    --error-e90: #FEECEC;
+    --error-e0: #570000;
+    
+    /* Notice Colors */
+    --notice-no40: #F7B500;
+    --notice-no90: #FEF8E5;
+    --notice-no10: #B06900;
+    
+    /* Surface Colors */
+    --surface-n100: #290932;
+    --surface-n90: #381763;
+    --surface-n80: #1F002A;
+    --surface-bg: linear-gradient(135deg, #1F002A 0%, #290932 50%, #381763 100%);
+    
+    /* On-Surface Colors - Updated for readability */
+    --on-surface-n0: #FFFFFF;
+    --on-surface-n20: #F5F5F5;
+    --on-surface-n30: #E4E4E4;
+    --on-surface-n40: #BBBBBB;
+    
+    /* Text Colors - White for readability on purple background */
+    --text-primary: #FFFFFF;
+    --text-secondary: #F5F5F5;
+    --text-tertiary: #E4E4E4;
+    
+    /* CTA Colors */
+    --cta-primary: #1F002A;
+    --cta-secondary: #F5F5F5;
+    
+    /* Product Accent - Cash Loan */
+    --accent-cl50: #AA3CE6;
+    --accent-cl90: #F9F1FD;
+    --accent-cl10: #3C0050;
+    
+    /* Shadows */
+    --shadow-primary: 0px 56.0832px 77.1144px -18.482px rgba(209, 217, 230, 0.51);
+    --shadow-elevation: rgba(209, 217, 230, 0.3);
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Titillium Web', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--surface-bg);
+    color: var(--text-primary);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+/* Ensure all text elements are non-selectable */
+h1, h2, h3, h4, h5, h6, p, span, div, button, label {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* Prevent text selection on mobile */
+body, html {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#app {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Screen Management */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    background: var(--surface-bg);
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Liquid Glass Loading Screen */
+#loading-screen {
+    background: linear-gradient(135deg, 
+        rgba(30, 30, 40, 0.3),
+        rgba(20, 25, 35, 0.2),
+        rgba(15, 20, 30, 0.1)
+    );
+    backdrop-filter: blur(40px) saturate(150%);
+    -webkit-backdrop-filter: blur(40px) saturate(150%);
+    color: rgba(255, 255, 255, 0.95);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+#loading-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(100, 120, 140, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(80, 100, 120, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+    animation: floatingOrbs 20s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes floatingOrbs {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+.loading-content {
+    text-align: center;
+    animation: fadeIn 1s ease-in;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 300px;
+    width: 90%;
+}
+
+.loading-content h1 {
+    font-family: 'Titillium Web';
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--cta-primary);
+    margin: 20px 0;
+}
+
+.loading-content p {
+    font-family: 'Titillium Web';
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--cta-primary);
+    margin: 16px 0;
+}
+
+/* Enhanced Hero Section */
+.hero-section {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.navi-logo {
+    position: relative;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.logo-image {
+    width: 80px;
+    height: 80px;
+    filter: 
+        drop-shadow(0 4px 20px rgba(100, 120, 140, 0.3))
+        drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+    animation: logoFloat 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.app-title {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 1),
+        rgba(200, 210, 220, 0.9),
+        rgba(180, 190, 200, 0.8),
+        rgba(255, 255, 255, 1)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 
+        0 4px 20px rgba(100, 120, 140, 0.2),
+        0 0 30px rgba(255, 255, 255, 0.08);
+    animation: titleGlow 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes titleGlow {
+    0%, 100% { 
+        background-position: 0% 50%;
+        filter: drop-shadow(0 0 15px rgba(100, 120, 140, 0.2));
+    }
+    50% { 
+        background-position: 100% 50%;
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
+    }
+}
+
+
+
+.app-subtitle {
+    font-family: 'Titillium Web';
+    font-size: 1.1rem;
+    color: var(--tertiary-s30);
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Features Grid */
+.features-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    min-width: 100px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.2);
+    min-width: 220px;
+    overflow: hidden;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.feature-item span {
+    font-family: 'Titillium Web';
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--cta-primary);
+    text-align: center;
+}
+
+/* Mobile Focus Indicator */
+.mobile-focus {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(31, 0, 42, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 2px solid rgba(138, 43, 226, 0.3);
+    box-shadow: 0 8px 30px rgba(138, 43, 226, 0.2);
+    min-width: 200px;
+}
+
+.mobile-focus.active {
+    display: flex;
+    animation: focusAppear 0.3s ease-out;
+}
+
+.focus-progress-ring {
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.focus-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.focus-percentage {
+    font-family: 'Titillium Web';
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-cl50);
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+.focus-instruction {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cta-primary);
+    opacity: 0.9;
+}
+
+.focus-progress {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top: 3px solid var(--accent-cl50);
+    transition: transform 0.3s ease;
+    transform-origin: center;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+}
+
+/* Enhanced Start Button */
+.start-ar-btn {
+    font-family: 'Titillium Web', sans-serif;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2),
+        rgba(100, 120, 140, 0.15),
+        rgba(80, 100, 120, 0.1)
+    );
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 20px 45px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(255, 255, 255, 0.15) inset,
+        0 -2px 8px rgba(0, 0, 0, 0.05) inset,
+        0 0 30px rgba(100, 120, 140, 0.1);
+    margin: 30px 0;
+    min-width: 280px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.start-ar-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent
+    );
+    animation: buttonShimmer 3s infinite;
+}
+
+@keyframes buttonShimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.start-ar-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.3),
+        rgba(120, 140, 160, 0.2),
+        rgba(100, 120, 140, 0.15)
+    );
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(255, 255, 255, 0.2) inset,
+        0 -4px 12px rgba(0, 0, 0, 0.08) inset,
+        0 0 40px rgba(120, 140, 160, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.start-ar-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15),
+        rgba(100, 120, 140, 0.2),
+        rgba(80, 100, 120, 0.15)
+    );
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 4px rgba(255, 255, 255, 0.08) inset,
+        0 0 25px rgba(100, 120, 140, 0.12);
+}
+
+
+
+.loading-coupon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--accent-cl90);
+    border-top: 4px solid var(--accent-cl50);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* AR Game Screen */
+#game-screen {
+    background: var(--surface-bg);
+    padding: 0;
+    position: relative;
+}
+
+#ar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#ar-container.hidden {
+    display: none;
+}
+
+#camera-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#ar-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#game-ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#top-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    pointer-events: auto;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 100px;
+}
+
+.stat-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.stat-item span:nth-child(2) {
+    font-family: 'Titillium Web';
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--cta-primary);
+    margin-bottom: 2px;
+}
+
+.stat-label {
+    font-family: 'Titillium Web';
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--tertiary-s30);
+}
+
+#instructions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    pointer-events: auto;
+}
+
+#instructions p {
+    font-family: 'Titillium Web';
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(31, 0, 42, 0.8);
+    padding: 16px 24px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-primary);
+}
+
+.coupon-info {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 24px;
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 300px;
+}
+
+.coupon-info .coupon-icon-large {
+    font-size: 64px;
+    margin-bottom: 12px;
+}
+
+.coupon-info h3 {
+    font-family: 'Titillium Web';
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cta-primary);
+    margin-bottom: 8px;
+}
+
+.coupon-info p {
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    color: var(--success-su40);
+    font-weight: 700;
+    margin: 8px 0;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.alignment-text {
+    font-size: 14px !important;
+    color: var(--tertiary-s30) !important;
+    font-weight: 500 !important;
+}
+
+/* Focus Indicator for Camera Detection */
+#focus-indicator {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+#focus-indicator.active {
+    display: flex;
+}
+
+.focus-circle {
+    width: 120px;
+    height: 120px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    position: relative;
+    animation: focusPulse 2s ease-in-out infinite;
+}
+
+.focus-circle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: var(--accent-cl50);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--accent-cl50);
+}
+
+.focus-progress-container {
+    position: relative;
+    width: 200px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.focus-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-cl50), var(--success-su40));
+    width: 0%;
+    transition: width 0.1s ease;
+    border-radius: 4px;
+}
+
+.focus-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Titillium Web';
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes focusPulse {
+    0%, 100% { 
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1);
+    }
+    50% { 
+        border-color: var(--accent-cl50);
+        transform: scale(1.05);
+    }
+}
+
+/* ARCore Specific Styles */
+.ar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.arcore-status {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.arcore-badge {
+    background: linear-gradient(45deg, #4285f4, #34a853);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-family: 'Titillium Web';
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+    animation: arcorePulse 2s ease-in-out infinite;
+}
+
+@keyframes arcorePulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 4px 16px rgba(66, 133, 244, 0.5);
+    }
+}
+
+/* ARCore Error Overlay Enhancements */
+.arcore-info {
+    text-align: left;
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(66, 133, 244, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #4285f4;
+}
+
+.arcore-info h3 {
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cta-primary);
+    margin-bottom: 12px;
+}
+
+.arcore-info ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.arcore-info li {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    color: var(--tertiary-s30);
+    margin: 6px 0;
+    font-weight: 500;
+}
+
+.error-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.retry-btn.secondary {
+    background: var(--on-surface-n40);
+    color: var(--text-primary);
+}
+
+.retry-btn.secondary:hover {
+    background: var(--tertiary-s30);
+}
+
+/* Enhanced ARCore Canvas */
+#ar-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: transparent;
+}
+
+/* ARCore WebXR Enhancements */
+.webxr-active #ar-container {
+    background: transparent;
+}
+
+.webxr-active #camera-feed {
+    display: none !important;
+}
+
+/* ARCore Success Enhancements */
+.arcore-success .success-stats p {
+    background: linear-gradient(45deg, #4285f4, #34a853);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin: 8px 0;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Plane Detection Indicator */
+.plane-detection {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(66, 133, 244, 0.9);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    animation: slideUpFade 0.3s ease-out;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ARCore Loading States */
+.arcore-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 40px;
+}
+
+.arcore-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(66, 133, 244, 0.3);
+    border-top: 4px solid #4285f4;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.arcore-loading-text {
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cta-primary);
+    text-align: center;
+}
+
+/* ARCore Loading Overlay */
+.arcore-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(31, 0, 42, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    backdrop-filter: blur(8px);
+}
+
+.arcore-loading-overlay .arcore-loading {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.arcore-loading-overlay p {
+    font-family: 'Titillium Web';
+    color: var(--tertiary-s30);
+    margin: 16px 0 0 0;
+    font-size: 14px;
+}
+
+/* ARCore Status Check */
+.arcore-status-check {
+    text-align: left;
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.arcore-status-check p {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    margin: 8px 0;
+    font-weight: 500;
+    color: var(--cta-primary);
+}
+
+/* ARCore Only Mode */
+.arcore-only #camera-feed {
+    display: none !important;
+}
+
+.arcore-only #ar-container {
+    background: transparent;
+}
+
+/* Remove conflicting elements in ARCore mode */
+body.arcore-mode #camera-feed {
+    display: none !important;
+}
+
+body.arcore-mode .fallback-coupons {
+    display: none !important;
+}
+
+/* WebXR Debug Information */
+.webxr-debug-info {
+    text-align: left;
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.webxr-debug-info h3 {
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cta-primary);
+    margin-bottom: 12px;
+}
+
+.webxr-debug-info p {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    margin: 8px 0;
+    font-weight: 500;
+    color: var(--cta-primary);
+}
+
+/* HTTPS Guidance */
+.https-guidance {
+    background: rgba(255, 87, 87, 0.1);
+    border: 2px solid #ff5757;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.https-guidance h3 {
+    font-family: 'Titillium Web';
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff5757;
+    margin-bottom: 12px;
+}
+
+.https-guidance p {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    color: var(--cta-primary);
+    margin: 8px 0;
+}
+
+.https-url {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 12px 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.https-url a {
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cta-primary);
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.https-url a:hover {
+    text-decoration: underline;
+    color: var(--primary-bright);
+}
+
+.https-guidance small {
+    font-size: 12px;
+    color: var(--tertiary-s30);
+    opacity: 0.8;
+}
+
+/* Game Complete Screen */
+#complete-screen {
+    background: var(--surface-bg);
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.complete-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.complete-content h1 {
+    font-family: 'Titillium Web';
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cta-primary);
+    margin-bottom: 16px;
+}
+
+.complete-icon {
+    font-size: 80px;
+    margin: 20px 0;
+}
+
+.complete-content h2 {
+    font-family: 'Titillium Web';
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--success-su40);
+    margin-bottom: 24px;
+}
+
+.final-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.final-stats .stat-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 120px;
+}
+
+.final-stats .stat-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.final-stats .stat-value {
+    font-family: 'Titillium Web';
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--cta-primary);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.final-stats .stat-label {
+    font-family: 'Titillium Web';
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--tertiary-s30);
+}
+
+.play-again-btn {
+    background: var(--cta-primary);
+    color: var(--text-primary);
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-family: 'Titillium Web';
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: var(--shadow-primary);
+}
+
+.play-again-btn:hover {
+    background: var(--primary-bright);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#player-level {
+    font-weight: bold;
+    color: #333;
+}
+
+.xp-bar {
+    width: 100px;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#xp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-su40), var(--success-su10));
+    width: 30%;
+    transition: width 0.3s ease;
+}
+
+.items-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.item-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* AR Fragment Display Styles */
+.fragment-display {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin: 20px 0;
+}
+
+.floating-fragment {
+    font-size: 80px;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px var(--accent-cl50));
+    position: relative;
+    z-index: 3;
+}
+
+.fragment-aura {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--accent-cl50);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+}
+
+.collect-circle {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.4;
+}
+
+/* Map Container */
+#map-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    z-index: 1;
+    border-radius: 0;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+#player-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: #2196F3;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+    z-index: 1000;
+}
+
+/* Bottom UI */
+#bottom-ui {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: var(--primary-bright);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 16px 20px;
+    z-index: 100;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Success Overlay Updates */
+.success-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.success-stats p {
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--success-su40);
+    margin: 4px 0;
+}
+
+/* Error Overlay */
+.error-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(31, 0, 42, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+}
+
+.error-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.error-content h2 {
+    font-family: 'Titillium Web';
+    font-weight: 600;
+    color: var(--error-e30);
+    margin-bottom: 16px;
+}
+
+.error-content p {
+    font-family: 'Titillium Web';
+    color: var(--cta-primary);
+    margin: 12px 0;
+}
+
+.retry-btn {
+    background: var(--cta-primary);
+    color: var(--text-primary);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Titillium Web';
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 16px;
+}
+
+.retry-btn:hover {
+    background: var(--primary-bright);
+    transform: translateY(-2px);
+}
+
+/* Encounter Screen */
+#encounter-screen {
+    background: var(--surface-bg);
+    position: relative;
+}
+
+.encounter-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: var(--surface-bg);
+}
+
+#camera-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+#ar-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: 0;
+}
+
+.encounter-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.fragment-info {
+    text-align: center;
+}
+
+.fragment-info h2 {
+    font-family: 'Titillium Web';
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--cta-primary);
+    margin-bottom: 8px;
+}
+
+#encounter-coupon-discount {
+    font-family: 'Titillium Web';
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--success-su40);
+    margin-bottom: 4px;
+}
+
+#encounter-coupon-category {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    color: var(--tertiary-s30);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.fragment-status {
+    font-family: 'Titillium Web';
+    font-size: 12px;
+    color: var(--accent-cl50);
+    font-style: italic;
+    font-weight: 500;
+}
+
+.collect-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.fragment-details {
+    text-align: center;
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    color: var(--tertiary-s30);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.movement-indicator {
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    color: var(--notice-no40);
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding: 8px 16px;
+    background: var(--notice-no90);
+    border-radius: 8px;
+    border: 1px solid var(--notice-no10);
+}
+
+.pokemon-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+#encounter-pokemon-sprite {
+    width: 200px;
+    height: 200px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.pokeball-btn, .collect-btn, .skip-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 48px;
+    touch-action: manipulation;
+}
+
+.pokeball-btn {
+    background: var(--accent-cl50);
+    color: var(--text-primary);
+}
+
+.pokeball-btn:hover {
+    background: var(--accent-cl10);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+}
+
+.collect-btn {
+    background: var(--success-su40);
+    color: var(--text-primary);
+    flex: 2;
+}
+
+.collect-btn:hover {
+    background: var(--success-su10);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+}
+
+.collect-btn:disabled {
+    background: var(--on-surface-n40);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.skip-btn {
+    background: var(--error-e30);
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.skip-btn:hover {
+    background: var(--error-e0);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+}
+
+/* Collection and Inventory Screens */
+#collection-screen, #inventory-screen {
+    background: var(--surface-bg);
+    padding: 20px;
+}
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.screen-header h2 {
+    font-family: 'Titillium Web';
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--cta-primary);
+    margin: 0;
+}
+
+.back-btn {
+    background: var(--cta-primary);
+    border: none;
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.back-btn:hover {
+    background: var(--primary-bright);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+}
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.pokemon-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+}
+
+.pokemon-card img {
+    width: 80px;
+    height: 80px;
+}
+
+.pokemon-card h3 {
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.pokemon-card .cp {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Inventory Screen */
+#inventory-screen {
+    background: #f5f5f5;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.inventory-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.inventory-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.inventory-item span {
+    display: block;
+    margin: 5px 0;
+}
+
+.inventory-item span:last-child {
+    font-weight: bold;
+    color: #2196F3;
+}
+
+/* Coupon Grid */
+.coupon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.coupon-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.coupon-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevation);
+}
+
+.coupon-card.expired {
+    opacity: 0.6;
+    background: rgba(189, 0, 0, 0.1);
+}
+
+.coupon-icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.coupon-card h3 {
+    font-family: 'Titillium Web';
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--cta-primary);
+}
+
+.discount {
+    font-family: 'Titillium Web';
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--success-su40);
+    margin-bottom: 8px;
+}
+
+.category {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    color: var(--tertiary-s30);
+    font-weight: 500;
+}
+
+.coupon-code {
+    font-family: 'Titillium Web';
+    font-size: 12px;
+    color: var(--accent-cl50);
+    font-weight: 600;
+    background: var(--accent-cl90);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--accent-cl10);
+}
+
+.expiry {
+    font-family: 'Titillium Web';
+    font-size: 12px;
+    color: var(--notice-no10);
+    font-weight: 500;
+}
+
+.expiry.expired {
+    color: var(--error-e30);
+    font-weight: 600;
+}
+
+.premium-badge {
+    background: linear-gradient(45deg, var(--accent-cl50), var(--tertiary-s30));
+    color: var(--text-primary);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    align-self: center;
+}
+
+/* Wallet Stats */
+.wallet-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+}
+
+.stat-icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-family: 'Titillium Web';
+    font-size: 14px;
+    color: var(--tertiary-s30);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-family: 'Titillium Web';
+}
+
+/* Collection Counter Styles */
+.collection-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.counter-label {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.counter-value {
+    color: var(--cta-primary);
+    font-size: 1.2em;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.counter-separator {
+    color: var(--text-tertiary);
+    font-size: 1.1em;
+}
+
+.counter-total {
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.counter-icon {
+    font-size: 1.2em;
+    margin-left: 4px;
+}
+
+/* Focus Timer Styles */
+.focus-timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    z-index: 10;
+}
+
+.timer-seconds {
+    color: var(--cta-primary);
+    font-size: 1.8em;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    line-height: 1;
+}
+
+.timer-label {
+    color: var(--text-secondary);
+    font-size: 1em;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* Enhanced Focus Indicator */
+.focus-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.focus-progress-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.focus-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--cta-primary), var(--cta-secondary));
+    border-radius: 50%;
+    transition: width 0.1s ease-out;
+}
+
+.focus-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.focus-stats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.focus-percentage {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-primary);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.focus-timer-display {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
+}
+
+.focus-instruction {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Immersive AR with DOM Overlay Layout */
+.ar-overlay-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    color: var(--text-primary);
+    z-index: 1000;
+}
+
+.ar-overlay-layout canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.ar-ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: env(safe-area-inset-top, 20px);
+    padding-bottom: 16px;
+    box-sizing: border-box;
+}
+
+/* Liquid Glass Banner Header */
+.ar-header-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px 25px;
+    height: 70px; /* Fixed height to prevent expansion */
+    min-height: 70px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.25),
+        rgba(255, 255, 255, 0.1)
+    );
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    pointer-events: auto;
+    margin: 10px 15px 15px 15px;
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(255, 255, 255, 0.2) inset,
+        0 -2px 8px rgba(0, 0, 0, 0.1) inset;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.ar-header-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    justify-content: center;
+}
+
+.ar-header-spacer {
+    width: 36px;
+    flex-shrink: 0;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.05)
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 4px 8px;
+    min-width: 40px;
+    height: 40px; /* Fixed height to match header constraints */
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(255, 255, 255, 0.1) inset;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth color transitions */
+}
+
+/* Active countdown timer - colors set by JavaScript */
+.countdown-timer.active {
+    /* Background color will be set by JavaScript based on time remaining */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        0 1px 3px rgba(255, 255, 255, 0.2) inset;
+    /* Animation removed - no pulsing */
+}
+
+.countdown-number {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    line-height: 1;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.countdown-label {
+    font-size: 0.6em;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    line-height: 1;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+/* Active countdown text */
+.countdown-timer.active .countdown-number {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.countdown-timer.active .countdown-label {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes countdownPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 4px 16px rgba(255, 87, 87, 0.3),
+            0 1px 3px rgba(255, 255, 255, 0.2) inset;
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 
+            0 6px 20px rgba(255, 87, 87, 0.4),
+            0 2px 6px rgba(255, 255, 255, 0.3) inset;
+    }
+}
+
+@keyframes countdownUrgent {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 4px 16px rgba(255, 59, 59, 0.5),
+            0 1px 3px rgba(255, 255, 255, 0.3) inset;
+    }
+    50% { 
+        transform: scale(1.15);
+        box-shadow: 
+            0 8px 24px rgba(255, 59, 59, 0.7),
+            0 2px 8px rgba(255, 255, 255, 0.4) inset;
+    }
+}
+
+/* Gentle pulse for green countdown state */
+@keyframes countdownGentle {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 2px 8px rgba(76, 175, 80, 0.2),
+            0 1px 3px rgba(255, 255, 255, 0.1) inset;
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 
+            0 3px 12px rgba(76, 175, 80, 0.3),
+            0 1px 4px rgba(255, 255, 255, 0.15) inset;
+    }
+}
+
+.ar-header-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent
+    );
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.brand-logo {
+    width: 32px;
+    height: 32px;
+}
+
+.brand-text {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    letter-spacing: 0.8px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.8)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* AR Sound Toggle */
+.ar-sound-toggle {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1)
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(255, 255, 255, 0.15) inset;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.ar-sound-toggle:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.15)
+    );
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.12),
+        0 2px 6px rgba(255, 255, 255, 0.2) inset;
+}
+
+.ar-sound-toggle:active {
+    transform: scale(0.95);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 1px 2px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Liquid Glass Bottom Instructions */
+.ar-instructions {
+    padding: 20px 25px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.05)
+    );
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    pointer-events: auto;
+    margin: 15px;
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        0 2px 8px rgba(255, 255, 255, 0.1) inset,
+        0 -2px 8px rgba(0, 0, 0, 0.05) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.ar-instructions::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent
+    );
+}
+
+.instruction-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.collection-counter-bottom {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.1)
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 8px 16px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        0 1px 4px rgba(255, 255, 255, 0.2) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.collection-counter-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.1), 
+        transparent
+    );
+    pointer-events: none;
+}
+
+.collection-text {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.collection-count {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgba(46, 204, 113, 1);
+    text-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(46, 204, 113, 0.3);
+    filter: drop-shadow(0 0 5px rgba(46, 204, 113, 0.5));
+}
+
+.collection-separator {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 3px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.collection-total {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.instruction-text {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        0 0 10px rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.3px;
+}
+
+.click-instruction {
+    margin: 5px 0;
+}
+
+.click-text {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    text-align: center;
+    font-style: italic;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.2px;
+}
+
+.instruction-progress {
+    width: 100%;
+}
+
+.progress-bar-bottom {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.05)
+    );
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1) inset,
+        0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill-bottom {
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(138, 43, 226, 0.9),
+        rgba(75, 0, 130, 0.9),
+        rgba(138, 43, 226, 0.9)
+    );
+    background-size: 200% 100%;
+    animation: progressShimmer 2s ease-in-out infinite;
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+    box-shadow: 
+        0 0 20px rgba(138, 43, 226, 0.6),
+        0 0 40px rgba(138, 43, 226, 0.3),
+        0 2px 8px rgba(138, 43, 226, 0.4) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+    );
+    border-radius: 10px 10px 0 0;
+}
+
+@keyframes progressShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Liquid Glass Mobile Responsive */
+@media (max-width: 480px) {
+    .ar-ui-overlay {
+        padding-top: max(env(safe-area-inset-top), 30px);
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+    
+    .ar-header-banner {
+        padding: 12px 15px;
+        margin: 5px 8px 8px 8px;
+        gap: 8px;
+        height: 60px; /* Slightly smaller on mobile but still fixed */
+        min-height: 60px;
+        backdrop-filter: blur(30px) saturate(150%);
+        -webkit-backdrop-filter: blur(30px) saturate(150%);
+    }
+    
+    .countdown-timer {
+        height: 35px;
+        min-width: 35px;
+        padding: 2px 6px;
+    }
+    
+    .countdown-number {
+        font-size: 1em;
+    }
+    
+    .countdown-label {
+        font-size: 0.55em;
+    }
+    
+    .header-brand {
+        order: 2;
+    }
+    
+    .header-stats {
+        order: 1;
+        gap: 6px;
+        width: 100%;
+    }
+    
+    .exit-btn {
+        order: 3;
+        align-self: flex-end;
+        padding: 4px 8px;
+    }
+    
+    .stat-item {
+        padding: 4px 6px;
+        min-width: 40px;
+    }
+    
+    .stat-icon-svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .timer-circle {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .timer-value {
+        font-size: 0.6em;
+    }
+    
+    .stat-value {
+        font-size: 1em;
+    }
+    
+    .stat-label {
+        font-size: 0.6em;
+    }
+    
+    .brand-text {
+        font-size: 1.1em;
+        letter-spacing: 0.5px;
+    }
+    
+    .ar-instructions {
+        padding: 15px 12px;
+        margin: 8px;
+        margin-bottom: max(8px, env(safe-area-inset-bottom));
+        backdrop-filter: blur(30px) saturate(150%);
+        -webkit-backdrop-filter: blur(30px) saturate(150%);
+    }
+    
+    .collection-counter-bottom {
+        padding: 6px 12px;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+    
+    .focus-indicator {
+        gap: 8px;
+    }
+    
+    .focus-circle {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .focus-coupon-icon {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .focus-percentage {
+        font-size: 1em;
+    }
+    
+    .focus-timer-display {
+        font-size: 0.8em;
+        padding: 1px 4px;
+    }
+    
+    .focus-instruction {
+        font-size: 0.7em;
+        max-width: 120px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .inventory-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    
+    #encounter-pokemon-sprite {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .catch-circle {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-30px); }
+    60% { transform: translateY(-15px); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.2); opacity: 0; }
+}
+
+@keyframes fallbackCouponFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(1deg); }
+    50% { transform: translateY(-5px) rotate(-1deg); }
+    75% { transform: translateY(-15px) rotate(0.5deg); }
+}
+
+/* Fallback Coupon Cards */
+.fallback-coupon-card:hover {
+    transform: translateY(-5px) scale(1.05) !important;
+    box-shadow: var(--shadow-elevation) !important;
+}
+
+.fallback-coupon-card:active {
+    transform: scale(0.95) !important;
+}
+
+/* Pokemon and AR Animations */
+@keyframes throwBall {
+    0% { 
+        transform: translate(-50%, 100%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -200%) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 0;
+    }
+}
+
+@keyframes captureSuccess {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(0.8) rotate(180deg); opacity: 0.5; }
+    100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+@keyframes captureCircle {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.1); opacity: 0; }
+}
+
+@keyframes escapeShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+@keyframes pokemonFlee {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    100% { transform: scale(0.3) translateY(-200px); opacity: 0; }
+}
+
+/* Map Markers */
+.pokemon-marker {
+    position: relative;
+    z-index: 1000;
+}
+
+.pokemon-marker-content {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    animation: pokemonBob 2s ease-in-out infinite;
+}
+
+.pokemon-marker-content img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #4CAF50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-timer {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 4px;
+    background: #4CAF50;
+    border-radius: 2px;
+    animation: timerShrink 900s linear;
+}
+
+@keyframes pokemonBob {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes timerShrink {
+    from { width: 20px; }
+    to { width: 0px; }
+}
+
+/* PokeStop Markers */
+.pokestop-marker-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pokestop-disc {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #2196F3, #03DAC6);
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pokestop-pole {
+    width: 2px;
+    height: 15px;
+    background: #666;
+    margin-top: -1px;
+}
+
+/* Player Marker */
+.player-marker-icon .player-dot {
+    width: 20px;
+    height: 20px;
+    background: #2196F3;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+    animation: playerPulse 2s infinite;
+}
+
+@keyframes playerPulse {
+    0% { box-shadow: 0 0 10px rgba(33, 150, 243, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(33, 150, 243, 0.8); }
+    100% { box-shadow: 0 0 10px rgba(33, 150, 243, 0.5); }
+}
+
+/* Thrown Pokeball */
+.thrown-pokeball {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.thrown-pokeball img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Overlays */
+.welcome-overlay,
+.catch-success-overlay,
+.flee-message-overlay,
+.out-of-balls-overlay,
+.temporary-message-overlay,
+.pokestop-rewards-overlay,
+.distance-message-overlay,
+.rare-spawn-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.welcome-content,
+.success-content,
+.flee-content,
+.out-of-balls-content,
+.temporary-message,
+.rewards-content,
+.distance-message,
+.rare-spawn-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 300px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-content h1 {
+    color: #2196F3;
+    margin-bottom: 20px;
+}
+
+.welcome-content img {
+    width: 80px;
+    height: 80px;
+    margin: 10px 0;
+}
+
+.welcome-content ul {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.welcome-content li {
+    margin: 8px 0;
+}
+
+.start-btn {
+    background: var(--cta-primary);
+    color: var(--text-primary);
+    border: none;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-family: 'Titillium Web';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+    min-height: 48px;
+}
+
+.start-btn:hover {
+    background: var(--primary-bright);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevation);
+}
+
+.success-content h2 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.success-content img {
+    width: 100px;
+    height: 100px;
+    margin: 10px 0;
+}
+
+.shiny-text {
+    color: #FFD700;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.error-screen {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 40px;
+}
+
+.error-details {
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 0;
+    font-size: 12px;
+}
+
+.retry-btn {
+    background: white;
+    color: #ff6b6b;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.empty-collection {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.empty-collection p {
+    margin: 10px 0;
+}
+
+/* Landscape mode adjustments */
+@media (orientation: landscape) {
+    .encounter-ui {
+        flex-direction: row;
+        padding: 10px 20px;
+    }
+    
+    .pokemon-display {
+        flex: 1;
+    }
+    
+    .catch-controls {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .pokemon-card,
+    .inventory-item {
+        background: #333;
+        color: white;
+    }
+    
+    .screen-header {
+        background: #222;
+        color: white;
+    }
+    
+    #collection-screen,
+    #inventory-screen {
+        background: #111;
+    }
+}

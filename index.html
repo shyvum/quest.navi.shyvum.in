@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navi Quest - WebXR AR Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen active">
+            <div class="hero-section">
+                <div class="navi-logo">
+                    <img src="assets/navi.svg" alt="Navi" class="logo-image">
+                    <div class="logo-glow"></div>
+                </div>
+                <h1 class="app-title">Navi Quest</h1>
+            </div>
+            
+            <button id="start-ar-btn" class="start-ar-btn">
+                <span class="btn-text">🚀 Start Your Quest!</span>
+                <div class="btn-glow"></div>
+            </button>
+            
+
+        </div>
+
+        <!-- Immersive AR with DOM Overlay -->
+        <div id="ar-container-view" class="screen ar-overlay-layout">
+            <!-- AR Canvas (Full Screen) -->
+            <canvas id="ar-canvas"></canvas>
+            
+            <!-- DOM Overlay UI -->
+            <div class="ar-ui-overlay">
+                <!-- Navi Banner -->
+                <div class="ar-header-banner">
+                    <div class="countdown-timer" id="countdown-timer">
+                        <span class="countdown-number" id="countdown-number">30</span>
+                        <span class="countdown-label">sec</span>
+                    </div>
+                    <div class="ar-header-center">
+                        <img src="assets/navi.svg" alt="Navi" class="brand-logo">
+                        <span class="brand-text">Quest</span>
+                    </div>
+                    <button id="ar-sound-toggle" class="ar-sound-toggle" title="Toggle Sound">
+                        🔊
+                    </button>
+                </div>
+                
+
+                
+                <!-- Bottom Instructions -->
+                <div class="ar-instructions">
+                    <div class="instruction-content">
+                        <div class="collection-counter-bottom">
+                            <span class="collection-text">Collected: </span>
+                            <span id="collected-count" class="collection-count">0</span>
+                            <span class="collection-separator">/</span>
+                            <span id="total-count" class="collection-total">4</span>
+                        </div>
+                        <span id="collection-status" class="instruction-text">Point camera at floor or table...</span>
+                        <div class="click-instruction">
+                            <span class="click-text">Tap on coupons to collect them</span>
+                        </div>
+                        <div class="instruction-progress">
+                            <div class="progress-bar-bottom">
+                                <div id="overall-progress" class="progress-fill-bottom"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legacy Game Screen (Hidden) -->
+        <div id="game-screen" class="screen arcore-only" style="display: none;">
+            <!-- Legacy content hidden -->
+        </div>
+
+        <!-- Simplified Complete Screen -->
+        <div id="complete-screen" class="screen">
+            <div class="complete-content">
+                <div class="success-animation">
+                    <div class="success-icon">✓</div>
+                </div>
+                <h2>Coupon Collected!</h2>
+                <div class="collected-coupon">
+                    <img src="assets/coupon.svg" alt="Collected Coupon" class="coupon-image">
+                </div>
+                <p>Great job! You've successfully collected your AR coupon.</p>
+                <button onclick="location.reload()" class="play-again-btn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Coupon Collection Screen -->
+        <div id="collection-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('game-screen')">← Back</button>
+                <h2>My Coupons</h2>
+            </div>
+            <div id="coupon-grid" class="coupon-grid">
+                <!-- Coupon cards will be populated here -->
+            </div>
+        </div>
+
+        <!-- Wallet Screen -->
+        <div id="inventory-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('game-screen')">← Back</button>
+                <h2>Savings Wallet</h2>
+            </div>
+            <div class="wallet-stats">
+                <div class="stat-card">
+                    <span class="stat-icon">💰</span>
+                    <span class="stat-label">Total Saved</span>
+                    <span id="total-savings" class="stat-value">$0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🎫</span>
+                    <span class="stat-label">Active Coupons</span>
+                    <span id="active-coupons" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">⭐</span>
+                    <span class="stat-label">Rewards Points</span>
+                    <span id="reward-points" class="stat-value">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- three.js -->
+    <script src="https://unpkg.com/three@0.126.0/build/three.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="js/webxr-coupon-game.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "pokemon-go-web",
+  "version": "1.0.0",
+  "description": "A web-based Pokemon Go clone with AR features and real-world map integration",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000"
+  },
+  "keywords": ["pokemon", "game", "ar", "geolocation", "web"],
+  "author": "Pokemon Go Web Developer",
+  "license": "MIT",
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "three": "^0.158.0"
+  }
+}
