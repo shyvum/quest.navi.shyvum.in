@@ -30,7 +30,7 @@ let gameEndTime = null;
 // 30-second challenge
 let challengeTimer = null;
 let challengeStartTime = null;
-const CHALLENGE_DURATION_SECONDS = 5; // Single source of truth for timer
+const CHALLENGE_DURATION_SECONDS = 30; // Single source of truth for timer
 let challengeTimeLimit = CHALLENGE_DURATION_SECONDS * 1000; // Convert to milliseconds
 let challengeActive = false;
 let challengeFailed = false;
