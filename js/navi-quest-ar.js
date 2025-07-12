@@ -518,7 +518,6 @@ function onSelect(event) {
     // Get the input source that triggered the select event
     const inputSource = event.inputSource;
     if (!inputSource) {
-        console.log('No input source');
         return;
     }
     
@@ -571,12 +570,8 @@ function onSelect(event) {
 
 // Collect a specific coupon from the multiple coupons array
 function collectMultipleCoupon(couponObj, index) {
-    console.log('Collecting treasure:', index, 'Current collected before:', getCouponsCollected());
-    
     // Mark as collected
     couponObj.userData.collected = true;
-    
-    console.log('Treasure collected! Current count after:', getCouponsCollected());
     
     // Add collection effect
     const originalScale = couponObj.scale.x;
@@ -604,7 +599,7 @@ function collectMultipleCoupon(couponObj, index) {
     
     // Update UI immediately (ensure this always runs)
     const collectedCount = getCouponsCollected();
-    console.log('Updating UI with collected count:', collectedCount);
+
     updateCollectionStatus('Treasure found!');
     updateCollectionCounter();
     
@@ -1009,7 +1004,7 @@ function showFailureScreen() {
             </div>
             
             <div class="win-page-actions">
-                <button class="win-btn primary" onclick="window.open('https://m.navi.com/NAVIHQ/ibq2M', '_blank')">Scan &amp; pay</button>
+                <button class="win-btn primary" onclick="redirectToPayment()">Scan &amp; pay</button>
                 <button class="win-btn secondary" onclick="exitToStart()">Exit</button>
             </div>
         </div>
@@ -2180,4 +2175,23 @@ function placeCoupon() {
     // This function is no longer needed for the new coupon system
     // Coupons are placed automatically when surfaces are detected
     updateCollectionStatus('Coupons ready for collection!');
+}
+
+// Simple payment redirect function
+function redirectToPayment() {
+    // Open payment URL and return to start
+    window.open('https://m.navi.com/NAVIHQ/ibq2M', '_blank');
+    
+    const failureOverlay = document.querySelector('.win-page-overlay');
+    if (failureOverlay) failureOverlay.remove();
+    
+    showScreen('loading-screen');
+    
+    // Update button text
+    setTimeout(() => {
+        const startBtn = document.getElementById('start-ar-btn');
+        if (startBtn) {
+            startBtn.innerHTML = '<span class="btn-text">🔄 Resume Quest!</span><div class="btn-glow"></div>';
+        }
+    }, 100);
 }
