@@ -660,20 +660,18 @@ function showWinPage() {
     if (arContainerView) arContainerView.style.display = 'none';
     if (startScreen) startScreen.style.display = 'none';
     
-    const completionTime = getCompletionTime();
-    
     // Create win page overlay
     const overlay = document.createElement('div');
     overlay.className = 'win-page-overlay';
     overlay.innerHTML = `
         <div class="win-page-content">
-            <h2>Quest Complete!</h2>
+            <h2>Congratulations!</h2>
             <p>You found all ${maxCoupons} treasures in Navi Quest!</p>
             
             <div class="completion-stats">
                 <div class="stat-item">
-                    <span class="stat-number">${completionTime}</span>
-                    <span class="stat-label">Completion Time</span>
+                    <span class="stat-number">Flat 20% OFF</span>
+                    <span class="stat-label">on the next bill payment upto Rs 300</span>
                 </div>
             </div>
             
@@ -997,20 +995,20 @@ function showFailureScreen() {
     overlay.style.left = '0';
     overlay.style.width = '100%';
     overlay.style.height = '100%';
+    const remainingTreasures = maxCoupons - collectedCount;
     overlay.innerHTML = `
         <div class="win-page-content">
-            <h2>Time's Up!</h2>
-            <p>You collected ${collectedCount} out of ${maxCoupons} treasures before time ran out.</p>
+            <h2>Oops!! Time's Up</h2>
+            <p>You were just short by ${remainingTreasures} treasure${remainingTreasures === 1 ? '' : 's'}.</p>
             
             <div class="completion-stats">
                 <div class="stat-item">
-                    <span class="stat-number">${CHALLENGE_DURATION_SECONDS}s</span>
-                    <span class="stat-label">Time Limit</span>
+                    <span class="stat-number">Get 30s extra</span>
+                    <span class="stat-label">if you do UPI payment in next 10 min</span>
                 </div>
             </div>
             
             <div class="win-page-actions">
-                <button class="win-btn primary" onclick="restartGame()">Try Again</button>
                 <button class="win-btn secondary" onclick="exitToStart()">Exit</button>
             </div>
         </div>
