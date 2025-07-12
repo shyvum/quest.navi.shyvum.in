@@ -30,7 +30,7 @@ let gameEndTime = null;
 // 30-second challenge
 let challengeTimer = null;
 let challengeStartTime = null;
-const CHALLENGE_DURATION_SECONDS = 30; // Single source of truth for timer
+const CHALLENGE_DURATION_SECONDS = 5; // Single source of truth for timer
 let challengeTimeLimit = CHALLENGE_DURATION_SECONDS * 1000; // Convert to milliseconds
 let challengeActive = false;
 let challengeFailed = false;
@@ -678,7 +678,7 @@ function showWinPage() {
 
             
             <div class="win-page-actions">
-                <button class="win-btn primary" onclick="restartGame()">Play Again</button>
+                <button class="win-btn primary" onclick="window.open('https://m.navi.com/NAVIHQ/Z7w2M', '_blank')">Pay Bill</button>
                 <button class="win-btn secondary" onclick="exitToStart()">Exit</button>
             </div>
         </div>
@@ -1009,6 +1009,7 @@ function showFailureScreen() {
             </div>
             
             <div class="win-page-actions">
+                <button class="win-btn primary" onclick="window.open('https://m.navi.com/NAVIHQ/ibq2M', '_blank')">Scan &amp; pay</button>
                 <button class="win-btn secondary" onclick="exitToStart()">Exit</button>
             </div>
         </div>
