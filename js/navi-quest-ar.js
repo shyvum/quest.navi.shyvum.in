@@ -666,7 +666,7 @@ function showWinPage() {
     overlay.innerHTML = `
         <div class="win-page-content">
             <h2>Congratulations!</h2>
-            <p>You found all ${maxCoupons} treasures in Navi Quest!</p>
+            <p>You found all ${maxCoupons} treasures in AR Quest!</p>
             
             <div class="completion-stats">
                 <div class="stat-item">
